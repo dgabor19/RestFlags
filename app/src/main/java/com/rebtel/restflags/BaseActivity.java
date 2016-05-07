@@ -59,20 +59,6 @@ public abstract class BaseActivity extends AppCompatActivity implements OnFragme
         super.onPause();
     }
 
-    /**
-     * Use this method to set the toolbar
-     * @param title
-     * @param logoResId
-     */
-    public void setToolbar(String title, int logoResId) {
-        if (logoResId != 0) {
-            mToolbar.setLogo(logoResId);
-        }
-        mToolbar.setTitle(title);
-
-
-        setSupportActionBar(mToolbar);
-    }
 
     public Handler getHandler() {
         return mHandler;

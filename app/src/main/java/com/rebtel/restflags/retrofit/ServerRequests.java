@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.rebtel.restflags.models.CountryDetails;
 import com.rebtel.restflags.utils.Constants;
 import com.rebtel.restflags.utils.RequestType;
 
@@ -23,7 +24,9 @@ public class ServerRequests {
 
 
     @SuppressWarnings("unchecked")
-    public static <T> void sendRequest(final Context context, final String url, T request, final String fragmentTag) {
+    public static <T> void sendRequest(
+            final Context context, final String url, T request, final String fragmentTag,
+            final RequestType requestType, final String... args) {
 
         RetrofitServiceInterfaces retrofitService = RetrofitServiceGenerator.createService(
                 RetrofitServiceInterfaces.class, url,
@@ -31,11 +34,29 @@ public class ServerRequests {
                 Constants.HTTP_READ_TIMEOUT_MILLIS, false, context);
 
         if (retrofitService != null) {
-            if (request instanceof String) {
+            if (requestType == RequestType.COUNTRIES) {
 
                 retrofitService
                         .getCountries()
-                        .enqueue(getCallback(JsonObject.class, context, fragmentTag, RequestType.COUNTRIES));
+                        .enqueue(getCallback(JsonObject.class, context, fragmentTag, requestType));
+
+                return;
+
+            } else if (requestType == RequestType.COUNTRY_DETAILS) {
+
+                retrofitService
+                        .getCountryDetails(args[0])
+                        .enqueue(new Callback<List<CountryDetails>>() {
+                            @Override
+                            public void onResponse(Call<List<CountryDetails>> call, Response<List<CountryDetails>> response) {
+                                ResponseHandler.handleResponse(response, context, fragmentTag, requestType);
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<CountryDetails>> call, Throwable t) {
+                                ResponseHandler.handleFailure(context, t, fragmentTag, requestType);
+                            }
+                        });
 
                 return;
             }

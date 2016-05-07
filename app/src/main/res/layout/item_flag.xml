@@ -12,7 +12,7 @@
         android:id="@+id/cardFlag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="60dp"
+        android:minHeight="80dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
@@ -23,17 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageFlag"/>
+                android:maxWidth="50dp"
+                android:id="@+id/imageFlag"
+                android:scaleType="fitCenter"
+                android:antialias="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:id="@+id/textFlag"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         </LinearLayout>

@@ -9,8 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rebtel.restflags.BaseActivity;
+import com.rebtel.restflags.MainApplication;
 import com.rebtel.restflags.R;
+import com.rebtel.restflags.interfaces.OnItemClickListener;
 import com.rebtel.restflags.models.Country;
+import com.rebtel.restflags.utils.Constants;
 
 import java.util.List;
 
@@ -23,16 +28,18 @@ public class FlagAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private List<Country> mCountries;
+    private OnItemClickListener mItemClickListener;
 
-    public FlagAdapter(Context context, List<Country> countries) {
+    public FlagAdapter(Context context, List<Country> countries, OnItemClickListener itemClickListener) {
         mContext = context;
         mCountries = countries;
+        mItemClickListener = itemClickListener;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        return new ViewHolder(inflater.inflate(R.layout.item_flag, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_flag, parent, false), mItemClickListener);
     }
 
     @Override
@@ -42,6 +49,13 @@ public class FlagAdapter extends RecyclerView.Adapter {
         Country country = mCountries.get(position);
 
         holder.mText.setText(country.getCountryName());
+        holder.mImage.setImageDrawable(null);
+
+
+        ImageLoader.getInstance().displayImage(
+                Constants.BASE_COUNTRIES_URL + String.format(Constants.IMAGE_COUNTRY_ENDPOINT, country.getCountryCode().toLowerCase()),
+                holder.mImage,
+                MainApplication.getDisplayImageLoaderOptions(mContext));
     }
 
     public void setCountries(List<Country> countries) {
@@ -55,17 +69,28 @@ public class FlagAdapter extends RecyclerView.Adapter {
         return mCountries.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CardView mCard;
         public ImageView mImage;
         public TextView mText;
+        public OnItemClickListener mItemClickListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, OnItemClickListener itemClickListener) {
             super(itemView);
 
             mCard = (CardView) itemView.findViewById(R.id.cardFlag);
             mImage = (ImageView) itemView.findViewById(R.id.imageFlag);
             mText = (TextView) itemView.findViewById(R.id.textFlag);
+            mItemClickListener = itemClickListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, this, getAdapterPosition());
+            }
         }
     }
 }

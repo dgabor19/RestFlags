@@ -7,13 +7,19 @@
     android:layout_height="match_parent"
     tools:context="com.rebtel.restflags.MainActivity">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.rebtel.restflags.fragments.MainFragment"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </fragment>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/container"/>
+
+    <!--<fragment-->
+        <!--android:id="@+id/mainFragment"-->
+        <!--android:name="com.rebtel.restflags.fragments.MainFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+    <!--</fragment>-->
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

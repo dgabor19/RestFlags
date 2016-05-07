@@ -6,14 +6,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
+import com.rebtel.restflags.BaseActivity;
 import com.rebtel.restflags.MainActivity;
 import com.rebtel.restflags.R;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
+
+import retrofit2.Converter;
 
 /**
  * Created by gabordudas on 06/05/16.
@@ -25,6 +33,7 @@ public class BaseFragment extends Fragment {
     protected Toolbar mToolbar;
     protected MainActivity mActivity;
     protected OnFragmentInteractionListener mListener;
+    protected FragmentManager mFragmentManager;
     protected boolean mIsOnTop = true;
     protected Handler mHandler;
 
@@ -35,6 +44,7 @@ public class BaseFragment extends Fragment {
         mActivity = (MainActivity) getActivity();
         mToolbar = mActivity.getToolbar();
         mHandler = new Handler();
+        mFragmentManager = getFragmentManager();
     }
 
     @Override
@@ -97,5 +107,18 @@ public class BaseFragment extends Fragment {
             builder.setNegativeButton(negativeButtonTextRes, onNegativeButtonListener);
         }
         return builder;
+    }
+
+    /**
+     * Use this method to set the toolbar
+     * @param activity
+     * @param title
+     */
+    public ActionBar setToolbar(BaseActivity activity, String title) {
+        mToolbar.setTitle(title);
+
+        activity.setSupportActionBar(mToolbar);
+
+        return activity.getSupportActionBar();
     }
 }

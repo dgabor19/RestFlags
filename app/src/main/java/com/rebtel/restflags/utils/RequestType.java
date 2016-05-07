@@ -6,7 +6,7 @@ package com.rebtel.restflags.utils;
  */
 public enum RequestType {
     COUNTRIES(Constants.COUNTRIES_ENDPOINT),
-    GET_COUNTRY_NAME(Constants.COUNTRY_NAME_ENDPOINT);
+    COUNTRY_DETAILS(Constants.COUNTRY_DETAILS_ENDPOINT);
 
     public String endpoint;
 
