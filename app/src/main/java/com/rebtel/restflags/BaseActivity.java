@@ -7,11 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+
+import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
+
 /**
  * Created by gabordudas on 06/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     public static final String TAG = BaseActivity.class.getSimpleName();
 
     public static int sHeight;

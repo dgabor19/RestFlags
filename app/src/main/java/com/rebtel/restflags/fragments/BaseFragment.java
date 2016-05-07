@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.rebtel.restflags.MainActivity;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
 
 /**
@@ -15,6 +17,8 @@ import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
 public class BaseFragment extends Fragment {
     public static final String TAG = BaseFragment.class.getSimpleName();
 
+    protected Toolbar mToolbar;
+    protected MainActivity mActivity;
     protected OnFragmentInteractionListener mListener;
     protected boolean mIsOnTop = true;
 
@@ -22,6 +26,8 @@ public class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mActivity = (MainActivity) getActivity();
+        mToolbar = mActivity.getToolbar();
     }
 
     @Override
