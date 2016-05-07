@@ -8,7 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
+
+import java.util.Map;
 
 /**
  * Created by gabordudas on 06/05/16.
@@ -22,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnFragme
     protected Handler mHandler = new Handler();
     protected FragmentManager mFragmentManager;
     protected Toolbar mToolbar;
+    protected Gson mGson;
 
     public enum InteractionType {
 
@@ -36,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnFragme
         sHeight = displaymetrics.heightPixels;
         sWidth = displaymetrics.widthPixels;
 
+        mGson = new Gson();
 
         mFragmentManager = getSupportFragmentManager();
     }

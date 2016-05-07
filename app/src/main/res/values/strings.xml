@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RestFlags</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_no_network"><u>Network connection is unavailable</u></string>
+    <string name="message_no_network">Please check your internet connection and try again.</string>
 </resources>

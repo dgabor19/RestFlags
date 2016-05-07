@@ -2,6 +2,7 @@ package com.rebtel.restflags.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,15 +11,24 @@ import android.view.ViewGroup;
 
 import com.rebtel.restflags.R;
 import com.rebtel.restflags.adapters.FlagAdapter;
+import com.rebtel.restflags.models.Country;
+import com.rebtel.restflags.retrofit.ServerRequests;
+import com.rebtel.restflags.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gabordudas on 06/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
-public class MainFragment extends BaseFragment {
+public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = MainFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
+    private FlagAdapter mAdapter;
+    private SwipeRefreshLayout mSwipeRefresh;
+    private List<Country> mCountries = new ArrayList<>();
 
     public MainFragment() {
 
@@ -46,9 +56,41 @@ public class MainFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerMain);
-        mRecyclerView.setAdapter(new FlagAdapter(mActivity));
+        mSwipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshMain);
+
+        mSwipeRefresh.setOnRefreshListener(this);
+
+        mAdapter = new FlagAdapter(mActivity, mCountries);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
 
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefresh.setRefreshing(true);
+                ServerRequests.sendRequest(mActivity, Constants.BASE_COUNTRIES_URL, "", TAG);
+            }
+        });
+    }
+
+    public void setCountries(List<Country> countries) {
+        mSwipeRefresh.setRefreshing(false);
+
+        mCountries = countries;
+
+        mRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                if (mAdapter != null) {
+                    mAdapter.setCountries(mCountries);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        ServerRequests.sendRequest(mActivity, Constants.BASE_COUNTRIES_URL, "", TAG);
     }
 }

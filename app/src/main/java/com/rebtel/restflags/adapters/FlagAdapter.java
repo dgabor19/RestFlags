@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rebtel.restflags.R;
+import com.rebtel.restflags.models.Country;
+
+import java.util.List;
 
 /**
  * Created by gabordudas on 06/05/16.
@@ -19,9 +22,11 @@ public class FlagAdapter extends RecyclerView.Adapter {
     public static final String TAG = FlagAdapter.class.getSimpleName();
 
     private Context mContext;
+    private List<Country> mCountries;
 
-    public FlagAdapter(Context context) {
+    public FlagAdapter(Context context, List<Country> countries) {
         mContext = context;
+        mCountries = countries;
     }
 
     @Override
@@ -34,12 +39,20 @@ public class FlagAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder vHolder, int position) {
         ViewHolder holder = (ViewHolder) vHolder;
 
+        Country country = mCountries.get(position);
 
+        holder.mText.setText(country.getCountryName());
+    }
+
+    public void setCountries(List<Country> countries) {
+        mCountries = countries;
+
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return mCountries.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

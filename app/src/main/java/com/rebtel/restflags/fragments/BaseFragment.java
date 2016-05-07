@@ -1,13 +1,18 @@
 package com.rebtel.restflags.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.rebtel.restflags.MainActivity;
+import com.rebtel.restflags.R;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
 
 /**
@@ -21,6 +26,7 @@ public class BaseFragment extends Fragment {
     protected MainActivity mActivity;
     protected OnFragmentInteractionListener mListener;
     protected boolean mIsOnTop = true;
+    protected Handler mHandler;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class BaseFragment extends Fragment {
 
         mActivity = (MainActivity) getActivity();
         mToolbar = mActivity.getToolbar();
+        mHandler = new Handler();
     }
 
     @Override
@@ -63,5 +70,32 @@ public class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public static AlertDialog.Builder getAlertDialog(Context context, String title, String message,
+                                                     boolean isCancelable, int positiveButtonTextRes,
+                                                     DialogInterface.OnClickListener onPositiveButtonListener,
+                                                     int negativeButtonTextRes,
+                                                     DialogInterface.OnClickListener onNegativeButtonListener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if (title != null) {
+            builder.setTitle(title);
+        }
+
+        if (message != null) {
+            builder.setMessage(message);
+        }
+
+        builder.setCancelable(isCancelable);
+
+        if (positiveButtonTextRes != 0 && onPositiveButtonListener != null) {
+            builder.setPositiveButton(positiveButtonTextRes, onPositiveButtonListener);
+        }
+
+        if (negativeButtonTextRes != 0 && onNegativeButtonListener != null) {
+            builder.setNegativeButton(negativeButtonTextRes, onNegativeButtonListener);
+        }
+        return builder;
     }
 }
