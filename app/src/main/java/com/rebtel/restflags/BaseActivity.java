@@ -3,6 +3,7 @@ package com.rebtel.restflags;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity implements OnFragme
     protected Handler mHandler = new Handler();
     protected FragmentManager mFragmentManager;
     protected Toolbar mToolbar;
+    protected AppBarLayout mAppBar;
     protected Gson mGson;
 
     public enum InteractionType {
@@ -66,5 +68,9 @@ public abstract class BaseActivity extends AppCompatActivity implements OnFragme
 
     public Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    public AppBarLayout getAppBar() {
+        return mAppBar;
     }
 }

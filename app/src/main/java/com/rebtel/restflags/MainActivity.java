@@ -1,20 +1,17 @@
 package com.rebtel.restflags;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-import com.rebtel.restflags.fragments.DetailFragment;
+import com.rebtel.restflags.fragments.DetailsFragment;
 import com.rebtel.restflags.fragments.MainFragment;
 import com.rebtel.restflags.interfaces.ResponseCallback;
 import com.rebtel.restflags.models.Country;
 import com.rebtel.restflags.models.CountryDetails;
 import com.rebtel.restflags.utils.RequestType;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +31,7 @@ public class MainActivity extends BaseActivity implements ResponseCallback {
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mAppBar = (AppBarLayout) findViewById(R.id.appBarLayout);
 
         mFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance(), MainFragment.TAG)
@@ -74,9 +72,9 @@ public class MainActivity extends BaseActivity implements ResponseCallback {
 
             List<CountryDetails> countryDetails = (List<CountryDetails>) response.body();
 
-            DetailFragment detailFragment = (DetailFragment) mFragmentManager.findFragmentByTag(DetailFragment.TAG);
-            if (detailFragment != null) {
-                detailFragment.setCountryDetails(countryDetails.get(0));
+            DetailsFragment detailsFragment = (DetailsFragment) mFragmentManager.findFragmentByTag(DetailsFragment.TAG);
+            if (detailsFragment != null) {
+                detailsFragment.setCountryDetails(countryDetails.get(0));
             }
 
         }

@@ -111,13 +111,16 @@ public class BaseFragment extends Fragment {
 
     /**
      * Use this method to set the toolbar
+     *
      * @param activity
      * @param title
      */
     public ActionBar setToolbar(BaseActivity activity, String title) {
-        mToolbar.setTitle(title);
+        if (mToolbar != null) {
+            mToolbar.setTitle(title);
 
-        activity.setSupportActionBar(mToolbar);
+            activity.setSupportActionBar(mToolbar);
+        }
 
         return activity.getSupportActionBar();
     }

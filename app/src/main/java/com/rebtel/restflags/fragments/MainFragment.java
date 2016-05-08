@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.rebtel.restflags.R;
 import com.rebtel.restflags.adapters.FlagAdapter;
@@ -105,7 +104,7 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onRefresh() {
-        ServerRequests.sendRequest(mActivity, Constants.BASE_COUNTRIES_URL, null, TAG, null);
+        ServerRequests.sendRequest(mActivity, Constants.BASE_COUNTRIES_URL, null, TAG, RequestType.COUNTRIES);
     }
 
     @Override
@@ -116,9 +115,9 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         0, R.anim.slide_out_down)
                 .replace(
                         R.id.container,
-                        DetailFragment.newInstance(mCountries.get(position), position),
-                        DetailFragment.TAG)
-                .addToBackStack(DetailFragment.TAG)
+                        DetailsFragment.newInstance(mCountries.get(position), position),
+                        DetailsFragment.TAG)
+                .addToBackStack(DetailsFragment.TAG)
                 .commit();
 
     }
