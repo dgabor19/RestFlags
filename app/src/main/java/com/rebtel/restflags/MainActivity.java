@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.rebtel.restflags.fragments.DetailsFragment;
@@ -11,7 +12,10 @@ import com.rebtel.restflags.fragments.MainFragment;
 import com.rebtel.restflags.interfaces.ResponseCallback;
 import com.rebtel.restflags.models.Country;
 import com.rebtel.restflags.models.CountryDetails;
+import com.rebtel.restflags.models.ErrorResponse;
 import com.rebtel.restflags.utils.RequestType;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,5 +87,18 @@ public class MainActivity extends BaseActivity implements ResponseCallback {
     @Override
     public void onError(int statusCode, String errorResponse, String fragmentTag, RequestType requestType) {
         Log.d(TAG, "ERROR " + statusCode + " " + errorResponse);
+
+        if (requestType == RequestType.COUNTRY_DETAILS) {
+            ErrorResponse error = mGson.fromJson(errorResponse, ErrorResponse.class);
+
+            if (error != null) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            DetailsFragment fragment = (DetailsFragment) mFragmentManager.findFragmentByTag(DetailsFragment.TAG);
+            if (fragment != null) {
+                fragment.setCountryDetails(null);
+            }
+        }
     }
 }

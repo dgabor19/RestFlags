@@ -7,6 +7,8 @@ import com.rebtel.restflags.interfaces.ResponseCallback;
 import com.rebtel.restflags.utils.Constants;
 import com.rebtel.restflags.utils.RequestType;
 
+import java.io.IOException;
+
 import retrofit2.Response;
 
 /**
@@ -53,7 +55,11 @@ public class ResponseHandler {
         }
 
         if (responseCallback != null) {
-            responseCallback.onError(response.code(), String.valueOf(response.body()), fragmentTag, requestType);
+            try {
+                responseCallback.onError(response.code(), response.errorBody().string(), fragmentTag, requestType);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
     }

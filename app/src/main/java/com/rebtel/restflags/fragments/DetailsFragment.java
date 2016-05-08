@@ -141,12 +141,12 @@ public class DetailsFragment extends BaseFragment implements SwipeRefreshLayout.
             mRegionText.setText(mCountryDetails.getRegion());
             mSubregionText.setText(mCountryDetails.getSubregion());
             mPopulationText.setText(String.valueOf(mCountryDetails.getPopulation()));
-            mLatlngText.setText(TextUtils.join(" ", mCountryDetails.getLatlng()));
+            mLatlngText.setText(mCountryDetails.getLatlng() != null ? TextUtils.join(" ", mCountryDetails.getLatlng()) : "");
             mAreaText.setText(String.valueOf(mCountryDetails.getArea()));
-            mTimezonesText.setText(mCountryDetails.getTimezones() != null ? TextUtils.join(" ", mCountryDetails.getTimezones()) : "");
-            mBordersText.setText(TextUtils.join(" ", mCountryDetails.getBorders()));
-            mCallingCodesText.setText(TextUtils.join(" ", mCountryDetails.getCallingCodes()));
-            mCurrenciesText.setText(TextUtils.join(" ", mCountryDetails.getCurrencies()));
+            mTimezonesText.setText(mCountryDetails.getTimezones() != null ? TextUtils.join("\n", mCountryDetails.getTimezones()) : "");
+            mBordersText.setText(mCountryDetails.getBorders() != null ? TextUtils.join("\n", mCountryDetails.getBorders()) : "");
+            mCallingCodesText.setText(mCountryDetails.getCallingCodes() != null ? TextUtils.join("\n", mCountryDetails.getCallingCodes()) : "");
+            mCurrenciesText.setText(mCountryDetails.getCurrencies() != null ? TextUtils.join("\n", mCountryDetails.getCurrencies()) : "");
         }
     }
 
