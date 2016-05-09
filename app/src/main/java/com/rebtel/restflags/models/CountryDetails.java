@@ -62,6 +62,10 @@ import java.util.List;
 //          "ca"
 //      ]
 //}
+
+/**
+ * Model for country details
+ */
 public class CountryDetails implements Serializable, Parcelable {
     @SerializedName("name")
     private String name;

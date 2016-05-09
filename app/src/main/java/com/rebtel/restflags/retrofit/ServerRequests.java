@@ -19,10 +19,24 @@ import retrofit2.Response;
  * Created by gabordudas on 07/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Helper class to send requests
+ */
 public class ServerRequests {
     public static final String TAG = ServerRequests.class.getSimpleName();
 
 
+    /**
+     * General method for sending requests
+     * @param context
+     * @param url
+     * @param request
+     * @param fragmentTag
+     * @param requestType
+     * @param args
+     * @param <T>
+     */
     @SuppressWarnings("unchecked")
     public static <T> void sendRequest(
             final Context context, final String url, T request, final String fragmentTag,
@@ -69,6 +83,15 @@ public class ServerRequests {
         throw new RuntimeException("Request type does not match!");
     }
 
+    /**
+     * Callback generator
+     * @param response
+     * @param context
+     * @param fragmentTag
+     * @param requestType
+     * @param <T>
+     * @return
+     */
     private static <T> Callback<T> getCallback(final Class<T> response,
                                                final Context context,
                                                final String fragmentTag,

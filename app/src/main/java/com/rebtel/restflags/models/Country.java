@@ -9,6 +9,10 @@ import java.io.Serializable;
  * Created by gabordudas on 07/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Model for country
+ */
 public class Country implements Serializable, Parcelable {
     private String countryCode;
     private String countryName;

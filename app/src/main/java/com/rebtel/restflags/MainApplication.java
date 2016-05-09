@@ -8,7 +8,6 @@ package com.rebtel.restflags;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.StrictMode;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,6 +27,11 @@ public class MainApplication extends Application {
         initImageLoader(this);
     }
 
+    /**
+     * Generates UniversalImageLoader's DisplayImageOptions
+     * @param context
+     * @return
+     */
     public static DisplayImageOptions getDisplayImageLoaderOptions(Context context) {
         if (sDisplayImageLoaderOptions == null) {
             initImageLoader(context.getApplicationContext());
@@ -40,7 +44,6 @@ public class MainApplication extends Application {
         // This configuration tuning is custom. You can tune every option, you may tune some of them,
         // or you can create default configuration by
         //  ImageLoaderConfiguration.createDefault(this);
-        // method.
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
         config.threadPriority(Thread.MAX_PRIORITY);
         config.threadPoolSize(10);

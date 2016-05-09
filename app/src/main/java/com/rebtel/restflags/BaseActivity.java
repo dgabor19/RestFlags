@@ -10,15 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
-
-import java.util.Map;
 
 /**
  * Created by gabordudas on 06/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
+ */
+
+/**
+ * Extendable Activity with common attributes, settings and methods
  */
 public abstract class BaseActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     public static final String TAG = BaseActivity.class.getSimpleName();

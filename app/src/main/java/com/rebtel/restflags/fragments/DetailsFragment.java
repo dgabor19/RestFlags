@@ -25,6 +25,10 @@ import com.rebtel.restflags.utils.RequestType;
  * Created by gabordudas on 07/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Detail view for selected country
+ */
 public class DetailsFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = DetailsFragment.class.getSimpleName();
 
@@ -130,6 +134,10 @@ public class DetailsFragment extends BaseFragment implements SwipeRefreshLayout.
         });
     }
 
+    /**
+     * Populating views with content from response
+     * @param countryDetails
+     */
     public void setCountryDetails(CountryDetails countryDetails) {
         mSwipeRefresh.setRefreshing(false);
 

@@ -16,6 +16,10 @@ import retrofit2.http.Path;
  * Created by gabordudas on 07/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Request base interface for Retrofit
+ */
 public interface RetrofitServiceInterfaces {
 
     @GET(Constants.COUNTRIES_ENDPOINT)

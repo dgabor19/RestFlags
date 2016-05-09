@@ -9,19 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 
 import com.rebtel.restflags.BaseActivity;
 import com.rebtel.restflags.MainActivity;
-import com.rebtel.restflags.R;
 import com.rebtel.restflags.interfaces.OnFragmentInteractionListener;
-
-import retrofit2.Converter;
 
 /**
  * Created by gabordudas on 06/05/16.
@@ -82,6 +75,18 @@ public class BaseFragment extends Fragment {
         mListener = null;
     }
 
+    /**
+     * Dialog factory method
+     * @param context
+     * @param title
+     * @param message
+     * @param isCancelable
+     * @param positiveButtonTextRes
+     * @param onPositiveButtonListener
+     * @param negativeButtonTextRes
+     * @param onNegativeButtonListener
+     * @return
+     */
     public static AlertDialog.Builder getAlertDialog(Context context, String title, String message,
                                                      boolean isCancelable, int positiveButtonTextRes,
                                                      DialogInterface.OnClickListener onPositiveButtonListener,

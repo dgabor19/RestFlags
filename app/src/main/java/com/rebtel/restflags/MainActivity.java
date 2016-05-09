@@ -15,8 +15,6 @@ import com.rebtel.restflags.models.CountryDetails;
 import com.rebtel.restflags.models.ErrorResponse;
 import com.rebtel.restflags.utils.RequestType;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -51,26 +49,9 @@ public class MainActivity extends BaseActivity implements ResponseCallback {
     public void onSuccess(Response response, String fragmentTag, RequestType requestType) {
         if (requestType == RequestType.COUNTRIES) {
 
-            List<Country> countries = new ArrayList<>();
-
-            JsonObject object = (JsonObject) response.body();
-
-            Set set = object.entrySet();
-            Iterator keys = set.iterator();
-
-            while(keys.hasNext()) {
-                // loop to get the dynamic key
-                Map.Entry entry = (Map.Entry) keys.next();
-
-                String key = String.valueOf(entry.getKey());
-                String value = String.valueOf(entry.getValue()).replace("\"", "");
-
-                countries.add(new Country(key, value));
-            }
-
             MainFragment mainFragment = (MainFragment) mFragmentManager.findFragmentByTag(MainFragment.TAG);
             if (mainFragment != null) {
-                mainFragment.setCountries(countries);
+                mainFragment.setCountries(getResponse(response));
             }
         } else if (requestType == RequestType.COUNTRY_DETAILS) {
 
@@ -100,5 +81,31 @@ public class MainActivity extends BaseActivity implements ResponseCallback {
                 fragment.setCountryDetails(null);
             }
         }
+    }
+
+    /**
+     * Processes the countries response
+     * @param response
+     * @return
+     */
+    private List<Country> getResponse(Response response) {
+        List<Country> countries = new ArrayList<>();
+
+        JsonObject object = (JsonObject) response.body();
+
+        Set set = object.entrySet();
+        Iterator keys = set.iterator();
+
+        while(keys.hasNext()) {
+            // loop to get the dynamic key
+            Map.Entry entry = (Map.Entry) keys.next();
+
+            String key = String.valueOf(entry.getKey());
+            String value = String.valueOf(entry.getValue()).replace("\"", "");
+
+            countries.add(new Country(key, value));
+        }
+
+        return countries;
     }
 }

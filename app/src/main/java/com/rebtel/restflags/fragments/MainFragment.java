@@ -25,6 +25,10 @@ import java.util.List;
  * Created by gabordudas on 06/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Fragment to hold the list of countries
+ */
 public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
     public static final String TAG = MainFragment.class.getSimpleName();
 
@@ -87,6 +91,10 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         });
     }
 
+    /**
+     * Sets the countries
+     * @param countries
+     */
     public void setCountries(List<Country> countries) {
         mSwipeRefresh.setRefreshing(false);
 
@@ -109,7 +117,6 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     public void onItemClick(View view, FlagAdapter.ViewHolder holder, int position) {
-//        Toast.makeText(mActivity, "Click on " + position, Toast.LENGTH_SHORT).show();
         mFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_up, 0,
                         0, R.anim.slide_out_down)

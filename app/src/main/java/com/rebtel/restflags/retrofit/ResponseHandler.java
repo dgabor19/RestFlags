@@ -15,10 +15,22 @@ import retrofit2.Response;
  * Created by gabordudas on 07/05/16.
  * Copyright (c) 2015 RestFlags. All rights reserved.
  */
+
+/**
+ * Helper class to handle responses
+ */
 public class ResponseHandler {
 
     public static final String TAG = ResponseHandler.class.getSimpleName();
 
+    /**
+     * Handles any responses
+     * @param response
+     * @param context
+     * @param fragmentTag
+     * @param requestType
+     * @param <T>
+     */
     public static <T> void handleResponse(final Response<T> response, final Context context,
                                           final String fragmentTag, RequestType requestType) {
         //isSuccess() returns true if status code is in the range [200..300].
@@ -29,6 +41,14 @@ public class ResponseHandler {
         }
     }
 
+    /**
+     * Handles the success responses only
+     * @param response
+     * @param context
+     * @param fragmentTag
+     * @param requestType
+     * @param <T>
+     */
     public static <T> void handleSuccessResponse(final Response<T> response, final Context context,
                                                  final String fragmentTag, RequestType requestType) {
         Log.d(TAG, "handleSuccessResponse.");
@@ -41,6 +61,14 @@ public class ResponseHandler {
         }
     }
 
+    /**
+     * Handles the error responses only, response was HTTP/200 but it failed
+     * @param response
+     * @param context
+     * @param fragmentTag
+     * @param requestType
+     * @param <T>
+     */
     public static <T> void handleErrorResponse(final Response<T> response, final Context context,
                                                final String fragmentTag, RequestType requestType) {
 
@@ -64,6 +92,13 @@ public class ResponseHandler {
         }
     }
 
+    /**
+     * Handles the error response when the app didn't receive HTTP/200
+     * @param context
+     * @param throwable
+     * @param fragmentTag
+     * @param requestType
+     */
     public static void handleFailure(Context context, final Throwable throwable,
                                      final String fragmentTag, RequestType requestType) {
         Log.d(TAG, "response failure for request type : " + requestType + ". Message : " + throwable.getMessage());

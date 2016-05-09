@@ -11,13 +11,20 @@ import retrofit2.Response;
 public interface ResponseCallback {
 
     /**
-     * Called when any response received from PFO server. Main activity implements this to pass the
+     * Called when any response received from server. Main activity implements this to pass the
      * status to corresponding fragment based on tag.
-     *
-     * @param response    response for Register, Login, Facebook Login, Logout etc.
-     * @param fragmentTag Fragment tag to which the response has to be passed.
+     * @param response
+     * @param fragmentTag
+     * @param requestType
      */
     void onSuccess(Response response, String fragmentTag, RequestType requestType);
 
+    /**
+     * Called when any response failed
+     * @param statusCode
+     * @param errorResponse
+     * @param fragmentTag
+     * @param requestType
+     */
     void onError(int statusCode, String errorResponse, String fragmentTag, RequestType requestType);
 }

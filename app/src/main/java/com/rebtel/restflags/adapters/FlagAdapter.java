@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.rebtel.restflags.BaseActivity;
 import com.rebtel.restflags.MainApplication;
 import com.rebtel.restflags.R;
 import com.rebtel.restflags.interfaces.OnItemClickListener;
@@ -58,6 +57,10 @@ public class FlagAdapter extends RecyclerView.Adapter {
                 MainApplication.getDisplayImageLoaderOptions(mContext));
     }
 
+    /**
+     * Setiing country list
+     * @param countries
+     */
     public void setCountries(List<Country> countries) {
         mCountries = countries;
 
